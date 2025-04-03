@@ -1,0 +1,3 @@
+python-telegram-bot
+miniflux
+python-dotenv
