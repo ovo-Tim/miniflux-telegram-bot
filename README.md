@@ -5,7 +5,7 @@ A simple telegram bot to read your miniflux starred feeds without public IP.
 ![img](./create_bot.png)
 Remember the token
 2. Update `.env` file with your token
-\n
+<br/>
 Format:
 ```
 TG_TOKEN=
