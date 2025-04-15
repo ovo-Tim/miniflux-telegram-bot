@@ -24,7 +24,7 @@ def init_miniflux(url: str|None=None, token: str|None=None):
 
     CLIENT = miniflux.Client(url, api_key=token)
 
-def get_started(limit: int=30) -> list[articleType]:
+def get_started(limit: int=60) -> list[articleType]:
     data = CLIENT.get_entries(starred=True, limit=limit)
     if data is None:
         return []

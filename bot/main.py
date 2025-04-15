@@ -13,6 +13,8 @@ COMMANDS = [
     ("mark_read", "Mark an article as readed and unstarred"),
 ]
 
+EXIT_ON_ERROR = True
+
 dotenv.load_dotenv()
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -34,6 +36,10 @@ def block_strangers_wapper(func):
         return await func(update, context)
     return wrapper
 
+async def handle_err(callback, context):
+    if EXIT_ON_ERROR:
+        logging.error(f"Error: {context.error}. Exiting.")
+        exit(1)
 @block_strangers_wapper
 async def start(update: Update, context: CallbackContext) -> None:
     # Update article list
@@ -63,5 +69,6 @@ if __name__ == "__main__":
     application.add_handler(CallbackQueryHandler(handle_pagination))
     application.add_handler(start_handler)
     application.add_handler(mark_read_handler)
+    application.add_error_handler(handle_err)
 
     application.run_polling()
